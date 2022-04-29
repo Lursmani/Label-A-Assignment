@@ -16,10 +16,3 @@ export const AlbumsContainerStyled = styled.div`
   justify-content: center;
 `;
 
-export const AlbumBoxStyled = styled.div<Props>`
-  display: grid;
-  flex: 1 0 300px;
-  min-height: 200px;
-  background-color: ${(props) => props.theme.colors.secondary};
-  margin: 5px;
-`;

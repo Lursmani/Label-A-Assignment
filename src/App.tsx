@@ -10,17 +10,15 @@ import Home from "./pages/Home/Home";
 import { ThemeProvider } from "styled-components";
 import { defautTheme } from "./defaultTheme";
 import { useDispatch, useSelector } from "react-redux";
-import { loadAlbums } from "./Redux/albums";
+import { changePage, loadAlbums, loadPagination } from "./Redux/albums";
+import { setLoading } from "./Redux/loading";
 
 function App() {
-  const albums = useSelector((state: any) => state.albums);
+  const data = useSelector((state: any) => state.albums);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(albums);
-  }, [albums]);
-
-  useEffect(() => {
+    dispatch(setLoading(true));
     axios
       .get("http://ws.audioscrobbler.com/2.0/", {
         params: {
@@ -28,18 +26,21 @@ function App() {
           artist: "Wu-Tang Clan",
           api_key: process.env.REACT_APP_API_KEY,
           format: "json",
-          limit: 50,
-          page: 1,
+          limit: 20,
+          page: data.currPage,
         },
       })
       .then((res) => {
-        dispatch(loadAlbums(res.data));
+        dispatch(loadAlbums(res.data.topalbums));
+        dispatch(loadPagination(res.data.topalbums["@attr"]));
         console.log(res.data);
+        dispatch(setLoading(false));
       })
       .catch((err) => {
         console.log(err);
+        dispatch(setLoading(false));
       });
-  }, []);
+  }, [data.currPage]);
   return (
     <ThemeProvider theme={defautTheme}>
       <OuterContainerStyled>
