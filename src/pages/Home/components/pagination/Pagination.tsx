@@ -13,10 +13,6 @@ const Pagination: React.FC = () => {
   const data = useSelector((state: any) => state.albums);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(data.currPage);
-  }, [data]);
-
   return (
     <PaginationOuterContainerStyled>
       <PaginationContainerStyled>

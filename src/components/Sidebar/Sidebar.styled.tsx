@@ -24,7 +24,7 @@ export const SidebarContainerStyled = styled.div<Props>`
     min-height: 10vh;
     grid-template-columns: 80% 20%;
     grid-template-rows: 10vh 15vh;
-    height: ${(props) => (props.sidebarOpen ? "10vh" : "20vh")};
+    height: ${(props) => (props.sidebarOpen ? "20vh" : "10vh")};
   }
   background: ${(props) => {
     return props.theme.colors.secondary;

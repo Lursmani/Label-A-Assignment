@@ -1,3 +1,4 @@
+import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -10,8 +11,9 @@ import Home from "./pages/Home/Home";
 import { ThemeProvider } from "styled-components";
 import { defautTheme } from "./defaultTheme";
 import { useDispatch, useSelector } from "react-redux";
-import { changePage, loadAlbums, loadPagination } from "./Redux/albums";
+import { loadAlbums, loadPagination } from "./Redux/albums";
 import { setLoading } from "./Redux/loading";
+import ExpandedAlbum from "./pages/ExpandedAlbum/ExpandedAlbum";
 
 function App() {
   const data = useSelector((state: any) => state.albums);
@@ -20,7 +22,7 @@ function App() {
   useEffect(() => {
     dispatch(setLoading(true));
     axios
-      .get("http://ws.audioscrobbler.com/2.0/", {
+      .get(`${process.env.REACT_APP_API_ADDRESS}`, {
         params: {
           method: "artist.getTopAlbums",
           artist: "Wu-Tang Clan",
@@ -33,7 +35,6 @@ function App() {
       .then((res) => {
         dispatch(loadAlbums(res.data.topalbums));
         dispatch(loadPagination(res.data.topalbums["@attr"]));
-        console.log(res.data);
         dispatch(setLoading(false));
       })
       .catch((err) => {
@@ -50,6 +51,7 @@ function App() {
           <ContentContainer>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/album/:albumTitle" element={<ExpandedAlbum />} />
             </Routes>
           </ContentContainer>{" "}
         </BrowserRouter>

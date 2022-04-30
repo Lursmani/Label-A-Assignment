@@ -16,16 +16,12 @@ const Home: React.FC = () => {
     }
   }, [albums]);
 
-  useEffect(() => {
-    console.log(albums);
-  }, [albums]);
-
   return (
     <HomeContainerStyled>
       <AlbumsContainerStyled>
         {albumsList &&
-          albumsList.map((album: any) => (
-            <AlbumBox album={album} key={album.id}></AlbumBox>
+          albumsList.map((album: any, index: number) => (
+            <AlbumBox album={album} key={index}></AlbumBox>
           ))}
       </AlbumsContainerStyled>
       <Pagination />
