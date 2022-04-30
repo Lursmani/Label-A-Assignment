@@ -9,6 +9,9 @@ import {
   SidebarContainerStyled,
   SidebarToggleStyled,
   MenuIconStyled,
+  SearchIconStyled,
+  NavItemLi,
+  SidebarTitleStyled
 } from "./Sidebar.styled";
 
 const Sidebar: React.FC = () => {
@@ -16,13 +19,17 @@ const Sidebar: React.FC = () => {
 
   return (
     <SidebarContainerStyled sidebarOpen={open}>
+      <SidebarTitleStyled>Wu-Tang Clan</SidebarTitleStyled>
       <SidebarToggleStyled onClick={() => setOpen(!open)}>
         <MenuIconStyled />
       </SidebarToggleStyled>{" "}
       <NavbarContainerStyled>
         <ul>
           <NavItem url="/" text="Home">
-            <HomeIconStyled fontSize="4rem" />
+            <HomeIconStyled fontSize="3rem" />
+          </NavItem>
+          <NavItem url="/search" text="Search">
+            <SearchIconStyled fontSize="3rem" />
           </NavItem>
         </ul>
       </NavbarContainerStyled>

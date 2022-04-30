@@ -1,8 +1,7 @@
-import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Sidebar from "./components/Sidebar/index";
+import Sidebar from "./components/Sidebar/Sidebar";
 import {
   ContentContainer,
   OuterContainerStyled,
@@ -14,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadAlbums, loadPagination } from "./Redux/albums";
 import { setLoading } from "./Redux/loading";
 import ExpandedAlbum from "./pages/ExpandedAlbum/ExpandedAlbum";
+import Search from "./pages/Search/Search";
 
 function App() {
   const data = useSelector((state: any) => state.albums);
@@ -52,6 +52,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/album/:albumTitle" element={<ExpandedAlbum />} />
+              <Route path="/search" element={<Search />} />
             </Routes>
           </ContentContainer>{" "}
         </BrowserRouter>

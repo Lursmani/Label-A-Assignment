@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { AiFillHome } from "react-icons/ai";
-import { AiOutlineMenu } from "react-icons/ai";
+import { AiOutlineMenu, AiOutlineSearch } from "react-icons/ai";
 
 type Props = {
   sidebarOpen?: boolean;
@@ -23,8 +23,8 @@ export const SidebarContainerStyled = styled.div<Props>`
     width: 100vw;
     min-height: 10vh;
     grid-template-columns: 80% 20%;
-    grid-template-rows: 10vh 15vh;
-    height: ${(props) => (props.sidebarOpen ? "20vh" : "10vh")};
+    grid-template-rows: 10vh auto;
+    height: ${(props) => (props.sidebarOpen ? "30vh" : "10vh")};
   }
   background: ${(props) => {
     return props.theme.colors.secondary;
@@ -57,6 +57,7 @@ export const NavbarContainerStyled = styled.div`
 
 export const NavItemLi = styled.li`
   list-style: none;
+  padding: 0.5rem 0;
 `;
 
 export const NavItemStyled = styled.div`
@@ -73,7 +74,7 @@ export const NavItemStyled = styled.div`
 
 export const NavTextStyled = styled.h3`
   color: ${(props) => props.theme.colors.textPrimary};
-  font-family: arial;
+  font-family: Bamboo;
   margin: 0;
   justify-self: start;
 `;
@@ -88,4 +89,20 @@ export const MenuIconStyled = styled(AiOutlineMenu)`
   color: ${(props) => props.theme.colors.textPrimary};
   font-size: 3em;
   align-self: center;
+`;
+
+export const SearchIconStyled = styled(AiOutlineSearch)`
+  color: ${(props) => props.theme.colors.textPrimary};
+  font-size: ${(props) => props.size};
+  align-self: center;
+`;
+
+export const SidebarTitleStyled = styled.h2`
+  color: ${(props) => props.theme.colors.textPrimary};
+  font-family: Bamboo;
+  font-size: 1.8rem;
+  align-self: center;
+  @media (max-width: 768px) {
+    padding-left: 2rem;
+  }
 `;
