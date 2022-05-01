@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { AiFillHome } from "react-icons/ai";
 import { AiOutlineMenu, AiOutlineSearch } from "react-icons/ai";
+import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs";
 
 type Props = {
   sidebarOpen?: boolean;
@@ -77,6 +78,7 @@ export const NavTextStyled = styled.h3`
   font-family: Bamboo;
   margin: 0;
   justify-self: start;
+  padding-left: 2px;
 `;
 
 export const HomeIconStyled = styled(AiFillHome).attrs((props: Props) => ({
@@ -105,4 +107,29 @@ export const SidebarTitleStyled = styled.h2`
   @media (max-width: 768px) {
     padding-left: 2rem;
   }
+  padding-left: 2px;
+`;
+export const ThemeToggleContainerStyled = styled.div`
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  @media (max-width: 768px) {
+    position: static;
+    display: grid;
+    justify-items: center;
+    align-items: start;
+
+    grid-column: 2/3;
+    grid-row: 2/3;
+  }
+`;
+
+export const DarkThemeToggleStyled = styled(BsFillMoonFill)`
+  color: ${(props) => props.theme.colors.textPrimary};
+  font-size: 2em;
+`;
+
+export const LightThemeToggleStyled = styled(BsFillSunFill)`
+  color: ${(props) => props.theme.colors.textPrimary};
+  font-size: 2em;
 `;

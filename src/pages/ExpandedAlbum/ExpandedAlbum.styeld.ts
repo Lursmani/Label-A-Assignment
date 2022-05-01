@@ -32,7 +32,7 @@ export const AlbumTracksContainerStyled = styled.div`
     flex-direction: column;
     grid-column: 1/3;
     grid-row: 2/3;
-    background: ${(props) => props.theme.colors.backgroundPrimary};
+    background: ${(props) => props.theme.colors.primary};
 `
 
 export const AlbumTrackDivStyled = styled.div`  

@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import albumsReducer from "./albums";
-import sidebarReducer from "./darkTheme";
+import darkTheme from "./darkTheme";
 
 const store = configureStore({
-  reducer: { albums: albumsReducer, sidebarOpen: sidebarReducer },
+  reducer: { albums: albumsReducer, darkTheme: darkTheme },
 });
 
 export default store;

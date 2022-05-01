@@ -4,7 +4,9 @@ import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 export const PaginationOuterContainerStyled = styled.div`
   display: grid;
   justify-items: center;
-  width: 100%;
+  @media (max-width: 768px) {
+    width: 100vw;
+  }
   background: ${(props) => props.theme.colors.secondary};
   transition: 0.5s ease-in-out;
 `;
@@ -13,6 +15,7 @@ export const PaginationContainerStyled = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
+  align-items: center;
   width: 30%;
   @media (max-width: 768px) {
     width: 100%;

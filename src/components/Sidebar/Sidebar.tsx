@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import NavItem from "./NavItem";
-import { toggleSidebar } from "../../Redux/darkTheme";
 import {
   HomeIconStyled,
   NavbarContainerStyled,
@@ -10,12 +8,18 @@ import {
   SidebarToggleStyled,
   MenuIconStyled,
   SearchIconStyled,
-  NavItemLi,
-  SidebarTitleStyled
+  SidebarTitleStyled,
+  DarkThemeToggleStyled,
+  ThemeToggleContainerStyled,
+  LightThemeToggleStyled,
 } from "./Sidebar.styled";
+import { ToggleDarkTheme } from "../../Redux/darkTheme";
 
 const Sidebar: React.FC = () => {
   const [open, setOpen] = useState(false);
+
+  const dispatch = useDispatch();
+  const darkThemeOn = useSelector((state: any) => state.darkTheme.darkTheme);
 
   return (
     <SidebarContainerStyled sidebarOpen={open}>
@@ -33,6 +37,13 @@ const Sidebar: React.FC = () => {
           </NavItem>
         </ul>
       </NavbarContainerStyled>
+      <ThemeToggleContainerStyled>
+        {darkThemeOn ? (
+          <LightThemeToggleStyled onClick={() => dispatch(ToggleDarkTheme())} />
+        ) : (
+          <DarkThemeToggleStyled onClick={() => dispatch(ToggleDarkTheme())} />
+        )}
+      </ThemeToggleContainerStyled>
     </SidebarContainerStyled>
   );
 };

@@ -4,14 +4,14 @@ export const darkThemeSlice = createSlice({
   initialState: {
     darkTheme: false,
   },
-  name: "sidebar",
+  name: "darkTheme",
   reducers: {
-    toggleSidebar: (state) => {
+    ToggleDarkTheme: (state) => {
       state.darkTheme = !state.darkTheme;
     },
   },
 });
 
-export const { toggleSidebar } = darkThemeSlice.actions;
+export const { ToggleDarkTheme } = darkThemeSlice.actions;
 
 export default darkThemeSlice.reducer;

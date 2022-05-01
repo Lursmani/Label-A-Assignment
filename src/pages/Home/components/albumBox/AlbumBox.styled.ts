@@ -49,6 +49,7 @@ export const IconContainer = styled.div`
 
 export const ArrowDownIcon = styled(MdKeyboardArrowDown)<IconProps>`
   transform: ${(props) => (props.$expanded ? "rotate(180deg)" : "rotate(0deg)")};
+  color: ${(props) => props.theme.colors.textPrimary};
 `;
 
 export const AlbumExpandText = styled.p`
@@ -56,7 +57,8 @@ export const AlbumExpandText = styled.p`
   font-weight: 500;
   margin: 0;
   padding: 5px 0;
-`;
+  font-family: arial;   
+  `;
 
 export const AlbumExpandDiv = styled.div`
   display: grid;
@@ -76,4 +78,5 @@ export const AlbumExpandedTrackListItem = styled.p`
   font-weight: 500;
   margin: 0;
   padding: 5px;
+  font-family: arial;
 `;

@@ -8,7 +8,8 @@ import {
 } from "./components/outerContainer/styled/outerContainer.styled";
 import Home from "./pages/Home/Home";
 import { ThemeProvider } from "styled-components";
-import { defautTheme } from "./defaultTheme";
+import { defaultTheme } from "./defaultTheme";
+import { darkTheme } from "./darkTheme";
 import { useDispatch, useSelector } from "react-redux";
 import { loadAlbums, loadPagination } from "./Redux/albums";
 import { setLoading } from "./Redux/loading";
@@ -18,6 +19,8 @@ import Search from "./pages/Search/Search";
 function App() {
   const data = useSelector((state: any) => state.albums);
   const dispatch = useDispatch();
+
+  const darkThemeOn = useSelector((state: any) => state.darkTheme.darkTheme);
 
   useEffect(() => {
     dispatch(setLoading(true));
@@ -43,7 +46,7 @@ function App() {
       });
   }, [data.currPage]);
   return (
-    <ThemeProvider theme={defautTheme}>
+    <ThemeProvider theme={darkThemeOn ? darkTheme : defaultTheme}>
       <OuterContainerStyled>
         <BrowserRouter>
           {" "}

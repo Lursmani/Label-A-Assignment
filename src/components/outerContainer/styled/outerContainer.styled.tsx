@@ -23,7 +23,8 @@ export const ContentContainer = styled.div`
   @media (max-width: 768px) {
     grid-column: 1/2;
     grid-row: 2/3;
-    min-height: 75vh;
+    min-height: 90vh;
+    max-width: 100vw;
   }
   background: ${(props) => props.theme.colors.primary};
 `;

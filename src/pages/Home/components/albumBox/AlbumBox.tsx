@@ -16,6 +16,7 @@ import { useState } from "react";
 const AlbumBox = ({ album }: { album: any }) => {
   const [expanded, setExpanded] = useState<boolean>(false);
   const [albumData, setAlbumData] = useState<any>();
+  const [error, setError] = useState<string>("");
 
   const handleAlbumExpand = () => {
     setExpanded(!expanded);
@@ -32,7 +33,12 @@ const AlbumBox = ({ album }: { album: any }) => {
           },
         })
         .then((res) => {
-          setAlbumData(res.data.album);
+          if (res.data.album.tracks) {
+            setError("");
+            setAlbumData(res.data.album);
+          } else {
+            setError("No tracks found");
+          }
         })
         .catch((err) => console.log(err));
     }
@@ -40,7 +46,7 @@ const AlbumBox = ({ album }: { album: any }) => {
 
   return (
     <AlbumBoxStyled album={album} expanded={expanded}>
-      <AlbumPictureStyled src={album.image[1]["#text"]} />{" "}
+      <AlbumPictureStyled src={album.image[2]["#text"]} />{" "}
       <Link to={`/album/${album.name}`} style={{ textDecoration: "none" }}>
         <AlbumTitleStyled>{album.name}</AlbumTitleStyled>
       </Link>
@@ -48,7 +54,7 @@ const AlbumBox = ({ album }: { album: any }) => {
         <AlbumExpandText>Tracklist</AlbumExpandText>
         <ArrowDownIcon $expanded={expanded} />
       </IconContainer>
-      {expanded && (
+      {expanded && !error ? (
         <AlbumExpandDiv>
           <AlbumExpandedTrackListDiv expanded={expanded}>
             {albumData && albumData.tracks ? (
@@ -61,9 +67,17 @@ const AlbumBox = ({ album }: { album: any }) => {
               })
             ) : (
               <AlbumExpandedTrackListItem>
-                Loading... or the tracks don't exist.
+                Loading...
               </AlbumExpandedTrackListItem>
             )}
+          </AlbumExpandedTrackListDiv>
+        </AlbumExpandDiv>
+      ) : (
+        <AlbumExpandDiv>
+          <AlbumExpandedTrackListDiv expanded={expanded}>
+            <AlbumExpandedTrackListItem>
+              No tracks found
+            </AlbumExpandedTrackListItem>
           </AlbumExpandedTrackListDiv>
         </AlbumExpandDiv>
       )}

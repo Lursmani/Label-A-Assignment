@@ -13,6 +13,7 @@ import {
 const ExpandedAlbum: React.FC = () => {
   const params = useParams();
   const [albumData, setAlbumData] = useState<any>();
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     axios
@@ -26,7 +27,12 @@ const ExpandedAlbum: React.FC = () => {
         },
       })
       .then((res) => {
-        setAlbumData(res.data);
+        if (!res.data.album.tracks) {
+          setError("No tracks found");
+        } else {
+          setError("");
+          setAlbumData(res.data);
+        }
       })
       .catch((err) => console.log(err));
   }, []);
@@ -37,31 +43,45 @@ const ExpandedAlbum: React.FC = () => {
         <AlbumPictureStyled src={albumData.album?.image[3]["#text"]} />
       )}
 
-      <AlbumTitleContainerStyled>
-        <AlbumTitleStyled>{`${params.albumTitle}`}</AlbumTitleStyled>
-        {albumData &&
-          albumData.album.wiki ? 
-            <AlbumTitleStyled>
-              Published on {`${albumData.album.wiki.published}`}
-            </AlbumTitleStyled> :
-             <AlbumTitleStyled>
-             Published on: Unknown
-           </AlbumTitleStyled>
-          }
-      </AlbumTitleContainerStyled>
-      <AlbumTracksContainerStyled>
-        {albumData &&
-          albumData.album.tracks ?
-          albumData.album.tracks.track.map((track: any) => {
-            return (
+      {!error ? (
+        <>
+          <AlbumTitleContainerStyled>
+            <AlbumTitleStyled>{`${params.albumTitle}`}</AlbumTitleStyled>
+            {albumData && albumData.album.wiki ? (
+              <AlbumTitleStyled>
+                Published on {`${albumData.album.wiki.published}`}
+              </AlbumTitleStyled>
+            ) : (
+              <AlbumTitleStyled>Published on: Unknown</AlbumTitleStyled>
+            )}
+          </AlbumTitleContainerStyled>
+          <AlbumTracksContainerStyled>
+            {albumData && albumData.album.tracks ? (
+              albumData.album.tracks.track.map((track: any) => {
+                return (
+                  <AlbumTrackDivStyled>
+                    <p>{track.name}</p>
+                  </AlbumTrackDivStyled>
+                );
+              })
+            ) : (
               <AlbumTrackDivStyled>
-                <p>{track.name}</p>
+                <p>Loading... </p>
               </AlbumTrackDivStyled>
-            );
-          })
-          : <AlbumTrackDivStyled><p>Loading... or the tracks don't exist.</p></AlbumTrackDivStyled>
-          }
-      </AlbumTracksContainerStyled>
+            )}
+          </AlbumTracksContainerStyled>
+        </>
+      ) : (
+        <>
+        <AlbumTitleContainerStyled>
+            <AlbumTitleStyled></AlbumTitleStyled>
+              <AlbumTitleStyled>
+                No Album Found
+              </AlbumTitleStyled>
+          </AlbumTitleContainerStyled>
+          
+          </>
+      )}
     </AlbumContainerStyled>
   );
 };
