@@ -63,7 +63,7 @@ const Search: React.FC = () => {
           value={query}
           type="text"
           name="query"
-          placeholder="Search for  WTC song"
+          placeholder="Find a WTC song"
         />
         <SearchInputButtonStyled onClick={handleSearch}>
           Search
