@@ -91,6 +91,7 @@ export const MenuIconStyled = styled(AiOutlineMenu)`
   color: ${(props) => props.theme.colors.textPrimary};
   font-size: 3em;
   align-self: center;
+  cursor: pointer;
 `;
 
 export const SearchIconStyled = styled(AiOutlineSearch)`
